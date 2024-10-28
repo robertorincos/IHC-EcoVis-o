@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVisão - Tipo de Evento</title>
+    <style>
+        body { background-color: #2d4733; color: white; text-align: center; font-family: Arial, sans-serif; }
+        .button { display: block; width: 80%; margin: 10px auto; padding: 10px 20px; background-color: white; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .buttonQ { display: block; width: 80%; margin: 10px auto; padding: 10px 20px; background-color: rgb(239, 109, 22); color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .buttonE { display: block; width: 80%; margin: 10px auto; padding: 10px 20px; background-color: rgb(0, 132, 255); color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .buttonD { display: block; width: 80%; margin: 10px auto; padding: 10px 20px; background-color: rgb(117, 68, 43); color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .button1 { padding: 10px 20px; margin: 10px; background-color: #ffc107; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>TIPO DE EVENTO</h1>
+    <button class="buttonQ" onclick="selectType('Queimada')">QUEIMADA</button>
+    <button class="buttonE" onclick="selectType('Enchente')">ENCHENTE</button>
+    <button class="buttonD" onclick="selectType('Desmatamento')">DESMATAMENTO</button>
+    <button class="button" onclick="selectType('Outro')">OUTRO</button>
+    <button class="button1" onclick="window.location.href='index.html'">MENU</button>
+    
+    
+
+    <script>
+        function selectType(type) {
+            const currentEvent = JSON.parse(localStorage.getItem('currentEvent')) || {};
+            currentEvent.type = type;
+            localStorage.setItem('currentEvent', JSON.stringify(currentEvent));
+            window.location.href = 'location.html';
+        }
+    </script>
+    <div class="bottom-image">
+        <img src="logo.png" alt="Bottom Image">
+        <h2>EcoVisão</h2>
+    </div>
+    
+    <style>
+        .bottom-image {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10; /* Ensures it stays on top */
+        }
+    
+        .bottom-image img {
+            max-width: 200px; /* Adjust size as needed */
+            opacity: 1; /* Optional: Adds slight transparency */
+        }
+    </style>
+</body>
+</html>

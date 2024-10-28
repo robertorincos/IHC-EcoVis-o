@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVisão - Lista de Eventos</title>
+    <style>
+        body { background-color: #2d4733; color: white; text-align: center; font-family: Arial, sans-serif; }
+        .container { padding: 20px; }
+        .event-item { background-color: #444; padding: 15px; margin: 10px auto; border-radius: 5px; width: 80%; text-align: left; color: white; position: relative; }
+        .button { padding: 10px 20px; margin: 10px; background-color: #ffc107; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .delete-btn { position: absolute; right: 10px; top: 10px; background-color: red; color: white; border: none; border-radius: 5px; padding: 5px; cursor: pointer; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Eventos</h1>
+        
+        <div id="eventList">
+            <!-- Dynamic event items will be loaded here -->
+        </div>
+
+        <button class="button" onclick="location.href='index.html'">MENU</button>
+    </div>
+
+    <script>
+        // Load events from localStorage and display them
+        function loadEvents() {
+            const eventList = document.getElementById('eventList');
+            eventList.innerHTML = ''; // Clear any existing events
+
+            const events = JSON.parse(localStorage.getItem('events')) || [];
+            if (events.length === 0) {
+                eventList.innerHTML = '<p>Nenhum evento registrado.</p>';
+                return;
+            }
+
+            events.forEach((event, index) => {
+                const eventItem = document.createElement('div');
+                eventItem.classList.add('event-item');
+
+                // Set type color
+                let typeColor = '#ffffff';
+                if (event.type === 'Queimada') typeColor = 'orange';
+                else if (event.type === 'Enchente') typeColor = 'blue';
+                else if (event.type === 'Desmatamento') typeColor = 'brown';
+
+                eventItem.style.borderLeft = `10px solid ${typeColor}`;
+
+                eventItem.innerHTML = `
+                    <h3 style="color: ${typeColor}">${event.type}</h3>
+                    <p><strong>Local:</strong> ${event.location}</p>
+                    <p><strong>Grau:</strong> ${event.severity}</p>
+                    <p><strong>Descrição:</strong> ${event.description}</p>
+                    <button class="delete-btn" onclick="deleteEvent(${index})">Excluir</button>
+                `;
+                eventList.appendChild(eventItem);
+            });
+        }
+
+        // Delete an event by index
+        function deleteEvent(index) {
+            let events = JSON.parse(localStorage.getItem('events')) || [];
+            events.splice(index, 1); // Remove the event at the specified index
+            localStorage.setItem('events', JSON.stringify(events)); // Save updated list
+            loadEvents(); // Reload the event list
+        }
+
+        // Load events on page load
+        window.onload = loadEvents;
+    </script>
+    <div class="bottom-image">
+        <img src="logo.png" alt="Bottom Image">
+        <h2>EcoVisão</h2>
+    </div>
+    
+    <style>
+        .bottom-image {
+            text-align: center;
+            margin-top: 20px; /* Space above the image */
+            padding-bottom: 20px; /* Space below the image */
+        }
+    
+        .bottom-image img {
+            max-width: 200px; /* Adjust size as needed */
+            opacity: 0.8; /* Optional transparency */
+        }
+    </style>
+    
+    
+</body>
+</html>

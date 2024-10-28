@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVisão - Home</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body { background-color: #2d4733; color: white; text-align: center; font-family: Arial, sans-serif; }
+        .container { padding: 20px; }
+        .button { padding: 15px 20px; margin: 10px; background-color: #ffc107; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        
+        /* Map Styling */
+        #map { height: 300px; width: 80%; margin: 20px auto; border-radius: 8px; border: 2px solid #ffc107; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EcoVisão</h1>
+        
+        <!-- Map Container -->
+        <div id="map">Loading map...</div>
+        
+        <button class="button" onclick="window.location.href='event_type.html'">RELATAR</button>
+        <button class="button" onclick="window.location.href='event_list.html'">EVENTOS</button>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        function initMap() {
+            const saoPauloLocation = [-23.5505, -46.6333]; // Coordinates for São Paulo, Brazil
+
+            // Initialize map with default São Paulo location
+            const map = L.map('map').setView(saoPauloLocation, 12);
+
+            // Add tile layer (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add marker at São Paulo or user location
+            let marker = L.marker(saoPauloLocation).addTo(map).bindPopup("São Paulo, Brasil").openPopup();
+
+            // Attempt to use user's current location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLocation = [position.coords.latitude, position.coords.longitude];
+                        map.setView(userLocation, 12);
+                        marker.setLatLng(userLocation).bindPopup("Você está aqui!").openPopup();
+                    },
+                    () => {
+                        console.warn("Could not get user location, defaulting to São Paulo.");
+                    }
+                );
+            }
+        }
+
+        // Initialize the map on page load
+        window.onload = initMap;
+    </script>
+    <div class="bottom-image">
+        <img src="logo.png" alt="Bottom Image">
+    </div>
+    
+    <style>
+        .bottom-image {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10; /* Ensures it stays on top */
+        }
+    
+        .bottom-image img {
+            max-width: 200px; /* Adjust size as needed */
+            opacity: 1; /* Optional: Adds slight transparency */
+        }
+    </style>
+</body>
+</html>

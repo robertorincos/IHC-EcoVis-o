@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVisão - Anexar Mídia</title>
+    <style>
+        body { background-color: #2d4733; color: white; text-align: center; font-family: Arial, sans-serif; }
+        .button1 { padding: 10px 20px; margin: 10px; background-color: #ffc107; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .button { padding: 10px 20px; margin: 10px; background-color: #39d0f6; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h1>Anexar Fotos/Vídeos</h1>
+    <button class="button" onclick="location.href='analysis.html'">ANEXAR</button>
+    <button class="button1" onclick="location.href='index.html'">MENU</button>
+    <button class="button1" onclick="history.back()">VOLTAR</button>
+    <div class="bottom-image">
+        <img src="logo.png" alt="Bottom Image">
+        <h2>EcoVisão</h2>
+    </div>
+    
+    <style>
+        .bottom-image {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10; /* Ensures it stays on top */
+        }
+    
+        .bottom-image img {
+            max-width: 200px; /* Adjust size as needed */
+            opacity: 1; /* Optional: Adds slight transparency */
+        }
+    </style>
+</body>
+</html>

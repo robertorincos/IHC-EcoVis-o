@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVisão - Local do Evento</title>
+    <style>
+        body { background-color: #2d4733; color: white; text-align: center; font-family: Arial, sans-serif; }
+        .button { display: block; width: 80%; margin: 10px auto; padding: 10px 20px; background-color: white; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .button1 { padding: 10px 20px; margin: 10px; background-color: #ffc107; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        input { width: 80%; padding: 10px; margin: 10px auto; border-radius: 5px; border: none; }
+    </style>
+</head>
+<body>
+    <h1>LOCAL DO EVENTO</h1>
+    <button class="button" onclick="saveLocation('Localização Atual')">Localização Atual</button>
+    <input type="text" id="customLocation" placeholder="Escrever Local">
+    <button class="button" onclick="saveCustomLocation()">Salvar e Continuar</button>
+    <button class="button1" onclick="window.location.href='index.html'">MENU</button>
+    <button class="button1" onclick="history.back()">VOLTAR</button>
+
+    <script>
+        function saveLocation(locationText) {
+            const currentEvent = JSON.parse(localStorage.getItem('currentEvent')) || {};
+            currentEvent.location = locationText;
+            localStorage.setItem('currentEvent', JSON.stringify(currentEvent));
+            window.location.href = 'severity.html';
+        }
+
+        function saveCustomLocation() {
+            const customLocation = document.getElementById('customLocation').value;
+            if (customLocation) {
+                saveLocation(customLocation);
+            } else {
+                alert('Por favor, insira um local.');
+            }
+        }
+    </script>
+    <div class="bottom-image">
+        <img src="logo.png" alt="Bottom Image">
+        <h2>EcoVisão</h2>
+    </div>
+    
+    <style>
+        .bottom-image {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10; /* Ensures it stays on top */
+        }
+    
+        .bottom-image img {
+            max-width: 200px; /* Adjust size as needed */
+            opacity: 1; /* Optional: Adds slight transparency */
+        }
+    </style>
+</body>
+</html>

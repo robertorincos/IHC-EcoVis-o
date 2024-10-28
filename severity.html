@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVisão - Grau do Evento</title>
+    <style>
+        body { background-color: #2d4733; color: white; text-align: center; font-family: Arial, sans-serif; }
+        .button1 { padding: 10px 20px; margin: 10px; background-color: #ffc107; color: black; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .button {
+        display: block;
+        width: 80%;
+        margin: 10px auto;
+        padding: 15px 20px; /* Increased padding for consistent button size */
+        font-size: 16px; /* Ensures text is readable and buttons are proportionate */
+        background-color: white;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Specific button colors for severity levels */
+    .low { background-color: #a4d66d; }
+    .medium { background-color: #f9d94e; }
+    .high { background-color: #f94e4e; }
+
+    </style>
+</head>
+<body>
+    <h1>GRAU DO EVENTO</h1>
+    <button class="button low" onclick="saveSeverity('Baixo')">BAIXO</button>
+    <button class="button medium" onclick="saveSeverity('Médio')">MÉDIO</button>
+    <button class="button high" onclick="saveSeverity('Alto')">ALTO</button>
+    <button class="button1" onclick="window.location.href='index.html'">MENU</button>
+    <button class="button1" onclick="history.back()">VOLTAR</button>
+
+    <script>
+        function saveSeverity(severity) {
+            const currentEvent = JSON.parse(localStorage.getItem('currentEvent')) || {};
+            currentEvent.severity = severity;
+            localStorage.setItem('currentEvent', JSON.stringify(currentEvent));
+            window.location.href = 'describe_event.html';
+        }
+    </script>
+    <div class="bottom-image">
+        <img src="logo.png" alt="Bottom Image">
+        <h2>EcoVisão</h2>
+    </div>
+    
+    <style>
+        .bottom-image {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10; /* Ensures it stays on top */
+        }
+    
+        .bottom-image img {
+            max-width: 200px; /* Adjust size as needed */
+            opacity: 1; /* Optional: Adds slight transparency */
+        }
+    </style>
+    
+</body>
+</html>
